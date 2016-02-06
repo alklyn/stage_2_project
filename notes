@@ -1,0 +1,26 @@
+inputs:
+-User answer.
+-Output Feedback on wheter the answer is right or wrong.
+
+simple:
+
+A string is a sequence of one or more __1__ surrounded by quotes. If you start a string with a 
+single quote you have to end it with __2__ quote. If you start a string with a __3__ quote you 
+have to end it in a double quote. Using the plus operator we can __4__ two or more strings together.
+
+medium:
+
+string.find(s, sub[, start[, end]])
+The find method returns the __1__ __2__ in string s where the substring sub is 
+found in s. Find returns __3__ if sub is not found in the slice s[start:end]. 
+Both start and end are __4__.
+
+
+hard:
+
+An __1__ variable is a variable data unique to each instance of a class and it
+is defined __2__ a method. __3__ variables are for attributes shared by all 
+instances of the class. __4__ is the transfer of characteristics of a class to
+other classes that are derived from it. When a method defined in a derived 
+class has the same name as a metod in it's base class it __5__ the method
+in the base class.
