@@ -16,10 +16,10 @@
 # To help you get started, we've provided a sample paragraph that you can use when testing your code.
 # Your game should consist of 3 or more levels, so you should add your own paragraphs as well!
 
-sample = '''A ___1___ is created with the def keyword. You specify the inputs a ___1___ takes by
-adding ___2___ separated by commas between the parentheses. ___1___s by default return ___3___ if you
-don't specify the value to return. ___2___ can be standard data types such as string, number, dictionary,
-tuple, and ___4___ or can be more complicated such as objects and lambda functions.'''
+#sample = '''A ___1___ is created with the def keyword. You specify the inputs a ___1___ takes by
+#adding ___2___ separated by commas between the parentheses. ___1___s by default return ___3___ if you
+#don't specify the value to return. ___2___ can be standard data types such as string, number, dictionary,
+#tuple, and ___4___ or can be more complicated such as objects and lambda functions.'''
 
 # The answer for ___1___ is 'function'. Can you figure out the others?
 
@@ -34,3 +34,48 @@ tuple, and ___4___ or can be more complicated such as objects and lambda functio
 # How can you adapt that design to work with numbered blanks?
 
 # If you need help, you can sign up for a 1 on 1 coaching appointment: https://calendly.com/ipnd1-1/20min/
+
+
+
+def verify_level(choice):
+    #This function tests if a valid difficulty level is provided.
+    levels = ["easy", "medium", "hard"]
+    for level in levels:
+        if level == choice:
+            return True
+    print "That's not an option!"
+    return False
+ 
+def request_difficulty():
+    #Get difficulty level from user
+    verified = False
+    while not verified:
+        print "Please select a game difficulty by typing it in!"
+        print "Possible choices include easy, medium, and hard."
+        choice = raw_input()
+        choice = choice.lower()
+        verified = verify_level(choice)
+
+
+def get_number_of_guesses():
+    #Get the numbet of guseses the user would like
+    verified = False
+    while not verified:
+        print "How many guesses would you like per problem?"
+        num_guesses = raw_input("Please enter a possitive integer number: ")      
+        
+        try:
+            num_guesses = int(num_guesses)
+            if num_guesses > 0:  
+                verified = True
+            else:
+                print"You need at least one guess!"
+                print
+        except ValueError:
+            print "That isn't an integer!"
+            print
+            
+
+difficulty_level = request_difficulty()
+num_guesses = get_number_of_guesses()
+    
