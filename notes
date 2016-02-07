@@ -4,17 +4,22 @@ inputs:
 
 simple:
 
-A string is a sequence of one or more __1__ surrounded by quotes. If you start a string with a 
-single quote you have to end it with __2__ quote. If you start a string with a __3__ quote you 
-have to end it in a double quote. Using the plus operator we can __4__ two or more strings together.
+A string is a sequence of one or more __1__ surrounded by quotes. If you start
+a string with a single quote you have to end it with a __2__ quote. If you start 
+a string with a __3__ quote you have to end it in a double quote. Using the 
+plus operator we can __4__ two or more strings together. The index of the first
+character of a string is __5__.
+
+["characters", "single", "double", "concatenate",  "0"]
 
 medium:
 
-string.find(s, sub[, start[, end]])
-The find method returns the __1__ __2__ in string s where the substring sub is 
-found in s. Find returns __3__ if sub is not found in the slice s[start:end]. 
-Both start and end are __4__.
+Strings are __1__table while lists are __2__table. Immutable objects cannot be
+__2__ed once they are created. String objects do not support item __3__. It is 
+called __4__ when there are two names that refer to the same object and this 
+only occurs in __5__table objects. 
 
+["immu", "mu", "assignment", "aliasing",  "mu"]
 
 hard:
 
@@ -22,5 +27,8 @@ An __1__ variable is a variable data unique to each instance of a class and it
 is defined __2__ a method. __3__ variables are for attributes shared by all 
 instances of the class. __4__ is the transfer of characteristics of a class to
 other classes that are derived from it. When a method defined in a derived 
-class has the same name as a metod in it's base class it __5__ the method
+class has the same name as a method in it's base class it __5__ the method
 in the base class.
+
+
+["instance", "within", "class", "inheritance",  "overrides"]

@@ -55,6 +55,9 @@ def request_difficulty():
         choice = raw_input()
         choice = choice.lower()
         verified = verify_level(choice)
+        
+    print "You've chosen easy!"
+    print
 
 
 def get_number_of_guesses():
@@ -62,11 +65,11 @@ def get_number_of_guesses():
     verified = False
     while not verified:
         print "How many guesses would you like per problem?"
-        num_guesses = raw_input("Please enter a possitive integer number: ")      
+        guesses = raw_input("Please enter a possitive integer number: ")      
         
         try:
-            num_guesses = int(num_guesses)
-            if num_guesses > 0:  
+            guesses = int(guesses)
+            if guesses > 0:  
                 verified = True
             else:
                 print"You need at least one guess!"
@@ -74,8 +77,11 @@ def get_number_of_guesses():
         except ValueError:
             print "That isn't an integer!"
             print
-            
+
+def quizz(level, guesses):
+    #Fill in the blanks game.
+    text["easy"] = 
 
 difficulty_level = request_difficulty()
-num_guesses = get_number_of_guesses()
+guesses = get_number_of_guesses()
     
