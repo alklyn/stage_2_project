@@ -1,5 +1,7 @@
 # IPND Stage 2 Final Project
 
+
+
 #A dictionary to hold the paragraphs for each of the levels
 paragraphs = dict()
 paragraphs["easy"] = \
@@ -70,42 +72,35 @@ def get_number_of_guesses():
     
     return guesses
 
-def validate_response(level, response, count):
-    """Check if player provided the correct answer."""
-    current_answer = answers[level][count - 1]
-    if response.lower() == current_answer.lower():
-        return True
-    else:
-        return False
-    
-
-def display_current_paragraph(level):
+def display_paragraph(paragraph):
     """ Prints out the current paragraph """
     print "The current paragraph reads as such:\n"
-    print paragraphs[level]
+    print paragraph
     print
 
-def update_current_paragraph(level, count):
+def update_paragraph(paragraph, answer, count):
     """Update the current paragraph with the correct answer.
-    count: Keeps track of the current blank/answer pair.
+    count: Keeps track of the current blank.
     """
     current_blank = "__{}__".format(count)
-    current_answer = answers[level][count - 1]
-    paragraphs[level] =  paragraphs[level].replace(current_blank, current_answer)
+    return  paragraph.replace(current_blank, answer)
     
 
-def play_quizz(level, guesses, blanks):
-    """Fill in the blanks game."""
-    for count in range(1, blanks + 1):
+def play_quizz(paragraph, current_answers, guesses):
+    """Fill in the blanks game.
+    The quiz will prompt a user with a sentence containing several blanks. The user 
+    is then be asked to fill in each blank appropriately to complete the sentence.
+    """
+    for index, answer in enumerate(current_answers):
         trys_left = guesses
         
         while trys_left > 0:
-            display_current_paragraph(level)
-            response = raw_input("What should go in blank number {}? ".format(count))
+            display_paragraph(paragraph)
+            response = raw_input("What should go in blank number {}? ".format(index + 1))
             
-            if validate_response(level, response, count):
+            if response.lower() == answer.lower():
                 print "\nCorrect!\n"
-                update_current_paragraph(level, count)
+                paragraph = update_paragraph(paragraph, answer, index + 1)
                 break
             else:
                 trys_left -= 1
@@ -114,13 +109,13 @@ def play_quizz(level, guesses, blanks):
                 else:
                     print "You've failed too many straight guesses!  Game over!"
                     return
-    display_current_paragraph(level)
+    display_paragraph(paragraph)
     print "You won!\n"
             
 
 
 level = get_level()
-guesses = get_number_of_guesses()
-blanks = 5
-    
-play_quizz(level, guesses, blanks)    
+current_paragraph = paragraphs[level] #get paragraph for current level
+current_answers = answers[level] #Get list of answers for current level
+guesses = get_number_of_guesses()    
+play_quizz(current_paragraph, current_answers, guesses)    
