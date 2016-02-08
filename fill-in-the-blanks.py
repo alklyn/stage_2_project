@@ -26,7 +26,7 @@ method in the base class."""
 answers = dict()
 answers["easy"] = ["characters", "single", "double", "concatenate",  "0"]
 answers["medium"] = ["immu", "mu", "chang", "assignment", "aliasing"]
-answers["hard"] = ["instance", "within", "class", "inheritance",  "overrides"]
+answers["hard"] = ["instance", "within", "Class", "Inheritance",  "overrides"]
 
 
 def verify_level(choice):
@@ -72,8 +72,8 @@ def get_number_of_guesses():
 
 def validate_response(level, response, count):
     """Check if player provided the correct answer."""
-    
-    if response == answers[level][count - 1]:
+    current_answer = answers[level][count - 1]
+    if response.lower() == current_answer.lower():
         return True
     else:
         return False
