@@ -15,11 +15,10 @@ character of a string is __5__.
 medium:
 
 Strings are __1__table while lists are __2__table. Immutable objects cannot be
-__2__ed once they are created. As a result string objects do not support item 
-__3__. It is called __4__ when there are two names that refer to the same object
-and this only occurs in __5__table objects. 
+__3__ed once they are created. As a result string objects do not support item 
+__4__. It is called __5__ when there are two names that refer to the same object.
 
-["immu", "mu", "assignment", "aliasing",  "mu"]
+["immu", "mu", "chang", "assignment", "aliasing"]
 
 hard:
 
