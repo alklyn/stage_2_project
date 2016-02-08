@@ -4,11 +4,11 @@
 # Now you'll work on your own game to practice your skills and demonstrate what you've learned.
 
 # For this project, you'll be building a Fill-in-the-Blanks quiz.
-# Your quiz will prompt a user with a paragraph containing several blanks.
-# The user should then be asked to fill in each blank appropriately to complete the paragraph.
+# Your quiz will prompt a player with a paragraph containing several blanks.
+# The player should then be asked to fill in each blank appropriately to complete the paragraph.
 # This can be used as a study tool to help you remember important vocabulary!
 
-# Note: Your game will have to accept user input so, like the Mad Libs generator,
+# Note: Your game will have to accept player input so, like the Mad Libs generator,
 # you won't be able to run it using Sublime's `Build` feature.
 # Instead you'll need to run the program in Terminal or IDLE.
 # Refer to Work Session 5 if you need a refresher on how to do this.
@@ -38,7 +38,11 @@
 
 
 def verify_level(choice):
-    #This function tests if a valid difficulty level is provided.
+    """This function tests if a valid difficulty level is provided.
+        choice: the level chosen by the player
+        The return value is True if the chosen level is valid otherwise
+        False is returned
+    """
     levels = ["easy", "medium", "hard"]
     for level in levels:
         if level == choice:
@@ -46,8 +50,8 @@ def verify_level(choice):
     print "That's not an option!"
     return False
  
-def request_difficulty():
-    #Get difficulty level from user
+def get_level():
+    """Get difficulty level from player"""
     verified = False
     while not verified:
         print "Please select a game difficulty by typing it in!"
@@ -56,16 +60,17 @@ def request_difficulty():
         choice = choice.lower()
         verified = verify_level(choice)
         
-    print "You've chosen easy!"
+    print "You've chosen {}!".format(choice)
     print
+    return choice
 
 
 def get_number_of_guesses():
-    #Get the numbet of guseses the user would like
+    """Get the number of guesses the player would like."""
     verified = False
     while not verified:
         print "How many guesses would you like per problem?"
-        guesses = raw_input("Please enter a possitive integer number: ")      
+        guesses = raw_input("Please enter a positive integer number: ")      
         
         try:
             guesses = int(guesses)
@@ -73,15 +78,88 @@ def get_number_of_guesses():
                 verified = True
             else:
                 print"You need at least one guess!"
-                print
         except ValueError:
             print "That isn't an integer!"
-            print
-
-def quizz(level, guesses):
-    #Fill in the blanks game.
-    text["easy"] = 
-
-difficulty_level = request_difficulty()
-guesses = get_number_of_guesses()
+    print 
     
+    return guesses
+
+def validate_response(level, response, count):
+    """Checks if player provided the correct answer
+    Returns True is player has entered the correct answer.
+    Otherwise it returns False"""
+    
+    if response == answers[level][count - 1]:
+        return True
+    else:
+        return False
+    
+
+def display_current_paragraph(level):
+    print "The current paragraph reads as such:\n"
+    print paragraph[level]
+    print
+
+def update_current_paragraph(level, count):
+    """Updates the current paragraph with the correct answer """
+    current_blank = "__{}__".format(count)
+    current_answer = answers[level][count - 1]
+    paragraph[level] =  paragraph[level].replace(current_blank, current_answer)
+    
+
+def quizz(level, guesses, blanks):
+    """Fill in the blanks game."""
+    for count in range(1, blanks + 1):
+        trys_left = guesses
+        
+        while trys_left > 0:
+            display_current_paragraph(level)
+            response = raw_input("What should go in blank number {}? ".format(count))
+            if validate_response(level, response, count):
+                print "\nCorrect!\n"
+                update_current_paragraph(level, count)
+                break
+            else:
+                trys_left -= 1
+                if trys_left > 0:
+                    print "That isn't the correct answer!  Let's try again; you have {} trys left!".format(trys_left)
+                else:
+                    print "You've failed too many straight guesses!  Game over!"
+                    return
+    display_current_paragraph(level)
+    print "You won!\n"
+            
+
+paragraph = dict()
+paragraph["easy"] = \
+"""A string is a sequence of one or more __1__ surrounded by quotes. If you start
+a string with a single quote you have to end it with a __2__ quote. If you start 
+a string with a __3__ quote you have to end it in a double quote. Using the 
+plus operator we can __4__ two or more strings together. The index of the first
+character of a string is __5__."""
+
+paragraph["medium"] = \
+"""Strings are __1__table while lists are __2__table. Immutable objects cannot be
+__2__ed once they are created. As a result string objects do not support item 
+__3__. It is called __4__ when there are two names that refer to the same object
+and this only occurs in __5__table objects."""
+
+paragraph["hard"] = \
+"""An __1__ variable is a variable that is unique to each instance of a class and
+it is defined __2__ a method of the class. __3__ variables are for attributes 
+shared by all instances of the class. __4__ is the transfer of characteristics
+of a class to other classes that are derived from it. When a method defined in
+a derived class has the same name as a method in it's base class it __5__ the 
+method in the base class."""
+
+answers = dict()
+answers["easy"] = ["characters", "single", "double", "concatenate",  "0"]
+answers["medium"] = ["immu", "mu", "assignment", "aliasing",  "mu"]
+answers["hard"] = ["instance", "within", "class", "inheritance",  "overrides"]
+
+
+level = get_level()
+guesses = get_number_of_guesses()
+blanks = 5
+    
+quizz(level, guesses, blanks)    
